@@ -1,0 +1,25 @@
+{
+  "name": "streamingapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreimihailescu/VideoStreamingApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andreimihailescu/VideoStreamingApp/issues"
+  },
+  "homepage": "https://github.com/andreimihailescu/VideoStreamingApp#readme"
+}
