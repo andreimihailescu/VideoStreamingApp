@@ -7,7 +7,7 @@ class StreamController {
             res.send('No video');
         }
 
-        const path = `public/video/${videoName}`;
+        const path = `resources/video/${videoName}`;
         const stat = fs.statSync(path);
         const fileSize = stat.size;
         const range = req.headers.range;
