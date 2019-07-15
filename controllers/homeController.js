@@ -8,7 +8,12 @@ class HomeController {
     }
 
     static room(req, res, next) {
-        res.render('room', {title: 'Express'});
+        res.render('room', {
+            videoUrl: {
+                full: req.query.video,
+                split: req.query.video.split('.')
+            }
+        });
     }
 }
 
