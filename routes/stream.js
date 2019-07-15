@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var streamController = require('../controllers/StreamController');
+var streamController = require('../controllers/streamController');
 
-router.get('/', streamController.streamController.stream);
+router.get('/', streamController.stream);
 
 module.exports = router;

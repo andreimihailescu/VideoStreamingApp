@@ -25,9 +25,7 @@ var server = http.createServer(app);
  * Create websocket server
  */
 
-const io = require('socket.io')(server);
-const socketConnectionCallback = require('./socket');
-io.on('connection', socketConnectionCallback.socketConnectionCallback);
+const socketIo = require('./socket')(server);
 
 /**
  * Listen on provided port, on all network interfaces.

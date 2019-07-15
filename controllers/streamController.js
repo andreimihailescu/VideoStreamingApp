@@ -38,4 +38,4 @@ class StreamController {
     }
 }
 
-exports.streamController = StreamController;
+module.exports = StreamController;

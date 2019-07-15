@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
+<% include layout/head.ejs %>
 
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+<h4>Videos list</h4>
 
-    <script src="/socket.io/socket.io.js" defer></script>
-    <script src="/javascripts/script.js" defer></script>
-  </head>
-  <body>
+<ul>
+    <% videoList.forEach(video => { %>
+        <li><a href="/room?video=<%= video %>"><%= video %></a></li>
+    <% }) %>
+</ul>
 
-    <video width="400" controls id="videoPlayer">
-      <source src="/stream?video=bunny.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
-
-  </body>
-
-
-</html>
+<% include layout/footer.ejs %>

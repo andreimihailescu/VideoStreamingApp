@@ -1,5 +1,6 @@
 var App = {
     videoPlayerNode: document.getElementById('videoPlayer'),
+    usersListNode: document.getElementById('usersList'),
     socket: io(),
     isSeekEventReceived: false,
 
@@ -16,7 +17,7 @@ var App = {
     },
 
     onSeekCallback() {
-        if(App.isSeekEventReceived){
+        if (App.isSeekEventReceived) {
             App.isSeekEventReceived = false;
             return;
         }
@@ -27,8 +28,6 @@ var App = {
     },
 
     onBroadcastCallback(data) {
-        console.log('EVENT RECEIVED: ', data);
-
         switch (data.eventType) {
             case 'start':
                 App.videoPlayerNode.play();
@@ -47,11 +46,22 @@ var App = {
         }
     },
 
+    onUserConnected(data) {
+        let html = '';
+
+        data.usersList.forEach(user => {
+            html += `<li>${user}</li>`;
+        });
+
+        App.usersListNode.innerHTML = html;
+    },
+
     init() {
         this.videoPlayerNode.onplay = this.onPlayCallback;
         this.videoPlayerNode.onpause = this.onPauseCallback;
         this.videoPlayerNode.onseeking = this.onSeekCallback;
         this.socket.on('broadcast', this.onBroadcastCallback);
+        this.socket.on('userConnected', this.onUserConnected);
     }
 };
 
