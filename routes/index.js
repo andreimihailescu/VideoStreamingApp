@@ -6,4 +6,6 @@ router.get('/', homeController.index);
 
 router.get('/room', homeController.room);
 
+router.get('/restart', homeController.restart);
+
 module.exports = router;
