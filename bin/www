@@ -26,17 +26,8 @@ var server = http.createServer(app);
  */
 
 const io = require('socket.io')(server);
-io.on('connection', client => {
-    client.on('event', data => {
-        console.log('WS: Event received', data);
-        io.sockets.emit('hi', 'HELLO');
-
-    });
-    client.on('disconnect', () => {
-        console.log('WS: User disconnected')
-    });
-    console.log('WS: User connected');
-});
+const socketConnectionCallback = require('./socket');
+io.on('connection', socketConnectionCallback.socketConnectionCallback);
 
 /**
  * Listen on provided port, on all network interfaces.
