@@ -1,8 +1,9 @@
 var App = {
     videoPlayerNode: document.getElementById('videoPlayer'),
     usersListNode: document.getElementById('usersList'),
-    socket: io(),
     isSeekEventReceived: false,
+    params: {},
+    socket: null,
 
     onPlayCallback() {
         App.socket.emit('start', {
@@ -56,7 +57,21 @@ var App = {
         App.usersListNode.innerHTML = html;
     },
 
+    getParams() {
+        location.search.substr(1).split("&").forEach(function (item) {
+            App.params[item.split("=")[0]] = item.split("=")[1]
+        })
+    },
+
+    socketConnect() {
+        this.socket = io.connect('', {
+            query: `video=${this.params.video}`
+        })
+    },
+
     init() {
+        this.getParams();
+        this.socketConnect();
         this.videoPlayerNode.onplay = this.onPlayCallback;
         this.videoPlayerNode.onpause = this.onPauseCallback;
         this.videoPlayerNode.onseeking = this.onSeekCallback;
