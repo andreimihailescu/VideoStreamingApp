@@ -6,7 +6,7 @@
 
 <video width="400" controls id="videoPlayer">
     <% if(videoUrl.split[1] === 'mkv') { %>
-        <source src="/stream?video=<%= videoUrl.full %>" type='video/mp4; codecs="a_ac3, avc"'>
+        <source src="/stream?video=<%= videoUrl.full %>" type="video/x-matroska">
     <% } else { %>
         <source src="/stream?video=<%= videoUrl.full %>" type="video/mp4">
     <% } %>
