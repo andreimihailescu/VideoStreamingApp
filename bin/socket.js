@@ -2,7 +2,7 @@ module.exports = function (server) {
     const io = require('socket.io')(server);
 
     function getConnectedClients(videoName) {
-        return Object.keys(io.sockets.connected);
+        return Object.keys(io.sockets.adapter.rooms[videoName].sockets);
     }
 
     function checkIfClientAlreadyConnected(client) {
@@ -21,10 +21,13 @@ module.exports = function (server) {
     }
 
     io.on('connection', socket => {
-        if (checkIfClientAlreadyConnected(socket)) {
-            console.log('WS: User already connected');
+        /*if (checkIfClientAlreadyConnected(socket)) {
+            console.log(`WS: User already connected from IP ${socket.handshake.address}`);
+            socket.disconnect(true);
             return;
-        }
+        }*/
+
+        console.log('WS: User connected', socket.id);
 
         const videoName = socket.conn.request._query.video;
         socket.join(videoName);
@@ -56,13 +59,22 @@ module.exports = function (server) {
             });
         });
 
+        socket.on('timeUpdate', data => {
+            io.sockets.adapter.rooms[videoName].currentPlaybackStatus = data;
+        });
+
         socket.on('disconnect', () => {
             console.log('WS: User disconnected', socket.id);
         });
-        console.log('WS: User connected', socket.id);
 
-        socket.emit('userConnected', {
-            usersList: getConnectedClients(videoName)
-        });
+        setTimeout(function () {
+            socket.to(videoName).emit('userConnected', {
+                usersList: getConnectedClients(videoName)
+            });
+
+            if (io.sockets.adapter.rooms[videoName].currentPlaybackStatus) {
+                socket.emit('initialSync', io.sockets.adapter.rooms[videoName].currentPlaybackStatus);
+            }
+        }, 1000);
     });
 };

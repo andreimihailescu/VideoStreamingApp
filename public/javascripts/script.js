@@ -57,6 +57,21 @@ var App = {
         App.usersListNode.innerHTML = html;
     },
 
+    onTimeUpdate() {
+        App.socket.emit('timeUpdate', {
+            currentTime: App.videoPlayerNode.currentTime,
+            paused: App.videoPlayerNode.paused
+        });
+    },
+
+    onInitialSync(data) {
+        debugger;
+        App.videoPlayerNode.currentTime = data.currentTime;
+        if (!data.paused) {
+            App.videoPlayerNode.play()
+        }
+    },
+
     getParams() {
         location.search.substr(1).split("&").forEach(function (item) {
             App.params[item.split("=")[0]] = item.split("=")[1]
@@ -69,14 +84,21 @@ var App = {
         })
     },
 
+    socketDisconnect() {
+        alert('You already have an opened connection to this lobby.');
+    },
+
     init() {
         this.getParams();
         this.socketConnect();
         this.videoPlayerNode.onplay = this.onPlayCallback;
         this.videoPlayerNode.onpause = this.onPauseCallback;
         this.videoPlayerNode.onseeking = this.onSeekCallback;
+        this.videoPlayerNode.ontimeupdate = this.onTimeUpdate;
         this.socket.on('broadcast', this.onBroadcastCallback);
         this.socket.on('userConnected', this.onUserConnected);
+        this.socket.on('initialSync', this.onInitialSync);
+        this.socket.on('disconnect', this.socketDisconnect);
     }
 };
 

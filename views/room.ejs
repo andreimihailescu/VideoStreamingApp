@@ -2,6 +2,8 @@
 <script src="/socket.io/socket.io.js" defer></script>
 <script src="/javascripts/script.js" defer></script>
 
+<!--https://stackoverflow.com/questions/3035295/html-5-video-tag-and-codecs-problem-->
+
 <video width="400" controls id="videoPlayer">
     <source src="/stream?video=<%= videoUrl.full %>" type="video/mp4">
     <track label="English" kind="subtitles" srclang="en" src="captions/<%= videoUrl.split[0] %>.vtt" default>
