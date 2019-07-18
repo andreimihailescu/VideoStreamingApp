@@ -5,11 +5,7 @@
 <!--https://stackoverflow.com/questions/3035295/html-5-video-tag-and-codecs-problem-->
 
 <video width="400" controls id="videoPlayer">
-    <% if(videoUrl.split[1] === 'mkv') { %>
-        <source src="/stream?video=<%= videoUrl.full %>" type='video/x-matroska; codecs="theora, vorbis"'>
-    <% } else { %>
         <source src="/stream?video=<%= videoUrl.full %>" type="video/mp4">
-    <% } %>
     <track label="English" kind="subtitles" srclang="en" src="captions/<%= videoUrl.split[0] %>.vtt" default>
     Your browser does not support HTML5 video.
 </video>
