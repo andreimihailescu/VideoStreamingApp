@@ -68,9 +68,9 @@ module.exports = function (server) {
         });
 
         setTimeout(function () {
-            socket.to(videoName).emit('userConnected', {
+            /*socket.to(videoName).emit('userConnected', {
                 usersList: getConnectedClients(videoName)
-            });
+            });*/
 
             if (io.sockets.adapter.rooms[videoName].currentPlaybackStatus) {
                 socket.emit('initialSync', io.sockets.adapter.rooms[videoName].currentPlaybackStatus);
