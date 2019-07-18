@@ -5,7 +5,27 @@ module.exports = function (server) {
         return Object.keys(io.sockets.connected);
     }
 
+    function checkIfClientAlreadyConnected(client) {
+        const connectedClients = io.sockets.connected;
+
+        for (let prop in connectedClients) {
+            if (!connectedClients.hasOwnProperty(prop)) continue;
+
+            if (connectedClients[prop].id !== client.id &&
+                connectedClients[prop].handshake.address === client.handshake.address) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     io.on('connection', socket => {
+        if (checkIfClientAlreadyConnected(socket)) {
+            console.log('WS: User already connected');
+            return;
+        }
+
         const videoName = socket.conn.request._query.video;
         socket.join(videoName);
 
