@@ -65,11 +65,11 @@ var App = {
     },
 
     onInitialSync(data) {
-        debugger;
-        App.videoPlayerNode.currentTime = data.currentTime;
         if (!data.paused) {
             App.videoPlayerNode.play()
         }
+
+        App.videoPlayerNode.currentTime = data.currentTime;
     },
 
     getParams() {
