@@ -21,11 +21,11 @@ module.exports = function (server) {
     }
 
     io.on('connection', socket => {
-        /*if (checkIfClientAlreadyConnected(socket)) {
+        if (checkIfClientAlreadyConnected(socket)) {
             console.log(`WS: User already connected from IP ${socket.handshake.address}`);
             socket.disconnect(true);
             return;
-        }*/
+        }
 
         console.log('WS: User connected', socket.id);
 
