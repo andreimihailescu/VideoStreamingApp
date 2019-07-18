@@ -33,7 +33,7 @@ class HomeController {
 
         setTimeout(()=> {
             process.exit();
-        }, 100);
+        }, 1000);
     }
 }
 
