@@ -33,7 +33,7 @@ nav a:hover {
 
 .section__item {
   position: relative;
-  width: 150px;
+  width: 200px;
   background-color: darkslategrey;
   margin-right: 5px; }
 
@@ -44,6 +44,20 @@ nav a:hover {
 .section__item span {
   position: absolute;
   top: 0; }
+
+.section__item__overlay {
+  position: absolute;
+  top: 0;
+  background: black;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  z-index: 1;
+  transition-duration: 0.3s;
+  cursor: pointer; }
+
+.section__item:hover .section__item__overlay {
+  opacity: 0.5; }
 
 body {
   margin: 0;
