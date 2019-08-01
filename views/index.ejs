@@ -1,11 +1,18 @@
 <% include layout/head.ejs %>
+<main>
+    <div class="section">
+        <div class="section__title">Videos list</div>
+        <div class="section__body">
+            <% videoList.forEach(video => { %>
 
-<h4>Videos list</h4>
+                <div class="section__item" onclick="location.href = '/room?video=<%- video %>'">
+                    <img src="/images/video-thumbnail.jpg" alt="">
+                    <span><%= video %></span>
+                </div>
 
-<ul>
-    <% videoList.forEach(video => { %>
-        <li><a href="/room?video=<%= video %>"><%= video %></a></li>
-    <% }) %>
-</ul>
+            <% }) %>
+        </div>
+    </div>
+</main>
 
 <% include layout/footer.ejs %>

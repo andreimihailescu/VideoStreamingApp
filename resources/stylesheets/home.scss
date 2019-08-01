@@ -1,0 +1,30 @@
+.section {
+  margin: 0 25px;
+}
+
+.section__title {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.section__body {
+  display: flex;
+}
+
+.section__item {
+  position: relative;
+  width: 150px;
+  background-color: darkslategrey;
+  margin-right: 5px;
+}
+
+.section__item img{
+  width: 100%;
+  height: 100%;
+}
+
+.section__item span{
+  position: absolute;
+  top: 0;
+}
